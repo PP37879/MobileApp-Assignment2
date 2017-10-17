@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:padding="@dimen/space"
+    tools:context="com.example.asus.assignment1.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/whitespace"
+        android:text="@string/app_name"
+        android:textSize="@dimen/font_size"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/whitespace"
+                android:text="@string/name"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/whitespace"
+                android:text="@string/lastname"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/whitespace"
+                android:text="@string/dateofbirth"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/whitespace"
+                android:text="@string/email"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/whitespace"
+                android:text="@string/phone"
+                android:textSize="@dimen/font_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space"
+            android:orientation="vertical">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+             <Spinner
+                 android:id="@+id/spinner"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="@dimen/whitespace2"
+                 android:textSize="@dimen/font_size">
+
+             </Spinner>
+             <EditText
+                 android:id="@+id/editname"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="@dimen/whitespace2"
+                 android:textSize="@dimen/font_size"
+                 android:inputType="textCapSentences"/>
+
+         </LinearLayout>
+            <EditText
+                android:id="@+id/editlastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/whitespace2"
+                android:textSize="@dimen/font_size"
+                android:inputType="textCapSentences"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/dobText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/whitespace2"
+                    android:textSize="@dimen/font_size">
+                </TextView>
+                <Button
+                    android:id="@+id/setDOB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/whitespace2"
+                    android:text="@string/dobset"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/whitespace2"
+                android:textSize="@dimen/font_size" />
+
+            <EditText
+                android:id="@+id/editno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/whitespace2"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:textSize="@dimen/font_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/whitespace"
+        android:text="@string/btn"
+        android:textSize="@dimen/font_size"
+        android:textStyle="bold" />
+
+</LinearLayout>
+

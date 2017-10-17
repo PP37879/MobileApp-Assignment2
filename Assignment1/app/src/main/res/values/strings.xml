@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Assignment1</string>
+    <string name="name">Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="dateofbirth">Date of Birth</string>
+    <string name="dobset">Set</string>
+    <string name="age">Age</string>
+    <string name="email">E-mail</string>
+    <string name="phone">Phone No.</string>
+    <string name="btn">Submit</string>
+    <string-array name="NameTitle">
+        <item>Master</item>
+        <item>Miss</item>
+        <item>Mr.</item>
+        <item>Mrs.</item>
+    </string-array>
+</resources>

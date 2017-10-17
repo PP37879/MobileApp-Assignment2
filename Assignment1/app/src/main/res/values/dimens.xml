@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="font_size">20sp</dimen>
+    <dimen name="whitespace">35dp</dimen>
+    <dimen name="whitespace2">15dp</dimen>
+    <dimen name="space">10dp</dimen>
+    <dimen name="img_w">150dp</dimen>
+    <dimen name="img_h">150dp</dimen>
+</resources>
