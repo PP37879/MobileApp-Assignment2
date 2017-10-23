@@ -5,17 +5,18 @@ import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import java.util.Date;
 import java.text.ParseException;
 import java.util.Locale;
 
 
 public class Main2Activity extends AppCompatActivity {
 
-    DateFormat fmtDateAndTime = DateFormat.getDateInstance();
     Calendar myCalendar = Calendar.getInstance();
+    DateFormat fmtDateAndTime = new SimpleDateFormat("yyyy/MM/dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +38,24 @@ public class Main2Activity extends AppCompatActivity {
 
         TextView txtage = (TextView) findViewById(R.id.txtage);
         String extra4 = getIntent().getStringExtra("extra4");
-        myCalendar.set(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH);
-        SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy");
-        Calendar bd = Calendar.getInstance();
-        try {
-            bd.setTime(format.parse(extra4));
-            Calendar today = Calendar.getInstance();
-            today.setTime(format.parse(today.getTime()+""));
-            int age = today.get(Calendar.YEAR)-bd.get(Calendar.YEAR);
-            txtage.setText(today.get(Calendar.YEAR)+"");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Calendar today = Calendar.getInstance();
 
-
+            String now = fmtDateAndTime.format(today.getTime());
+            String[] birthDateBuffer = extra4.split("/");
+            String[] todayBuffer = now.split("/");
+            Log.d("",birthDateBuffer.length+"");
+            Log.d("",todayBuffer.length+"");
+            int yearNow = Integer.parseInt(todayBuffer[0]);
+            int birthYear = Integer.parseInt(birthDateBuffer[0]);
+            int monthNow = Integer.parseInt(todayBuffer[1]);
+            int birthMonth = Integer.parseInt(birthDateBuffer[1]);
+            int dayNow = Integer.parseInt(todayBuffer[2]);
+            int birthDay = Integer.parseInt(birthDateBuffer[2]);
+            int age = yearNow-birthYear;
+            if(birthMonth == monthNow && birthDay > dayNow){
+                age--;
+            }
+            txtage.setText(age+"");
         TextView txtphone = (TextView) findViewById(R.id.txtno);
         String extra5 = getIntent().getStringExtra("extra5");
         txtphone.setText(extra5);

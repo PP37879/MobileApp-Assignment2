@@ -8,6 +8,8 @@
     <string name="email">E-mail</string>
     <string name="phone">Phone No.</string>
     <string name="btn">Submit</string>
+    <string name="file_radio_label">File</string>
+    <string name="pref_radio_label">Pref. Obj.</string>
     <string-array name="NameTitle">
         <item>Master</item>
         <item>Miss</item>

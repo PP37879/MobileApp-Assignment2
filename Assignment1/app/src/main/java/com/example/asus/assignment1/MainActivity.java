@@ -1,11 +1,12 @@
 package com.example.asus.assignment1;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,12 +16,9 @@ import android.widget.Spinner;
 import android.content.Context;
 import android.widget.TextView;
 
-
 public class MainActivity extends AppCompatActivity {
-
     DateFormat fmtDateAndTime = DateFormat.getDateInstance();
     Calendar myCalendar = Calendar.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 if(!value3.matches(regexCheckMail) || value3.length() == 0) {
                     mail.setError("Email format is not valid");
                 }
-
                 String value5 = phone.getText().toString();
                 if (phone.getText().length() != 10) {
                     phone.setError("Invalid format");
@@ -89,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
     };
     private void updateLabel(){
         TextView dob = (TextView)findViewById(R.id.dobText);
+        fmtDateAndTime = new SimpleDateFormat("yyyy/MM/dd");
         dob.setText(fmtDateAndTime.format(myCalendar.getTime()));
+        Log.d("",dob.getText().toString());
     }
 }
