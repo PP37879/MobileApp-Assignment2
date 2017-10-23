@@ -12,11 +12,10 @@ import java.util.Date;
 import java.text.ParseException;
 import java.util.Locale;
 
-
 public class Main2Activity extends AppCompatActivity {
 
     Calendar myCalendar = Calendar.getInstance();
-    DateFormat fmtDateAndTime = new SimpleDateFormat("yyyy/MM/dd");
+    DateFormat fmtDateAndTime = new SimpleDateFormat("dd-MM-yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +39,25 @@ public class Main2Activity extends AppCompatActivity {
         String extra4 = getIntent().getStringExtra("extra4");
         Calendar today = Calendar.getInstance();
 
-            String now = fmtDateAndTime.format(today.getTime());
-            String[] birthDateBuffer = extra4.split("/");
-            String[] todayBuffer = now.split("/");
-            Log.d("",birthDateBuffer.length+"");
-            Log.d("",todayBuffer.length+"");
-            int yearNow = Integer.parseInt(todayBuffer[0]);
-            int birthYear = Integer.parseInt(birthDateBuffer[0]);
-            int monthNow = Integer.parseInt(todayBuffer[1]);
-            int birthMonth = Integer.parseInt(birthDateBuffer[1]);
-            int dayNow = Integer.parseInt(todayBuffer[2]);
-            int birthDay = Integer.parseInt(birthDateBuffer[2]);
-            int age = yearNow-birthYear;
-            if(birthMonth == monthNow && birthDay > dayNow){
-                age--;
-            }
-            txtage.setText(age+"");
+        String now = fmtDateAndTime.format(today.getTime());
+        String[] birthDateBuffer = extra4.split("-");
+        String[] todayBuffer = now.split("-");
+
+        int yearNow = Integer.parseInt(todayBuffer[2]);
+        int birthYear = Integer.parseInt(birthDateBuffer[2]);
+        int monthNow = Integer.parseInt(todayBuffer[1]);
+        int birthMonth = Integer.parseInt(birthDateBuffer[1]);
+        int dayNow = Integer.parseInt(todayBuffer[0]);
+        int birthDay = Integer.parseInt(birthDateBuffer[0]);
+        int age = yearNow - birthYear;
+        if (birthMonth == monthNow && birthDay > dayNow && birthYear == yearNow) {
+            age--;
+        } else if (birthMonth == monthNow && birthDay > dayNow) {
+            age--;
+        }
+        if (age >= 0) {
+            txtage.setText("" + age);
+        }
         TextView txtphone = (TextView) findViewById(R.id.txtno);
         String extra5 = getIntent().getStringExtra("extra5");
         txtphone.setText(extra5);
@@ -87,6 +89,5 @@ public class Main2Activity extends AppCompatActivity {
             imgView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.img_h);
             imgView.getLayoutParams().width = (int) getResources().getDimension(R.dimen.img_w);
         }
-
     }
 }

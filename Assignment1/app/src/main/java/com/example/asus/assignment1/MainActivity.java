@@ -1,9 +1,11 @@
 package com.example.asus.assignment1;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,13 +14,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.content.Context;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 public class MainActivity extends AppCompatActivity {
     DateFormat fmtDateAndTime = DateFormat.getDateInstance();
     Calendar myCalendar = Calendar.getInstance();
+    public static final String PREFS_NAME = "myPrefFile";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         final Button submit = (Button) findViewById(R.id.submit);
         final Spinner spinner = (Spinner)findViewById(R.id.spinner);
         final Button dobButton = (Button)findViewById(R.id.setDOB);
+        final RadioButton prefBtn = (RadioButton)findViewById(R.id.pref_radio);
+        final RadioButton fileBtn = (RadioButton)findViewById(R.id.file_radio);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.NameTitle,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -41,6 +50,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         updateLabel();
+        prefBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                SharedPreferences shared_pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+                SharedPreferences.Editor editor = shared_pref.edit();
+                editor.putString("title",spinner.getSelectedItem().toString());
+                editor.putString("name",name.getText().toString());
+                editor.putString("lastname",lname.getText().toString());
+                editor.putString("dobText",dobText.getText().toString());
+                editor.putString("mail",mail.getText().toString());
+                editor.putString("phone",phone.getText().toString());
+                editor.commit();
+            }
+        });
+        fileBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                String fileName = "personalInformation.txt";
+                File file = new File(getExternalFilesDir(null),fileName);
+                FileOutputStream outputStream;
+                String titleString  = spinner.getSelectedItem().toString();
+                String nameString = name.getText().toString();
+                String lnameString = lname.getText().toString();
+                String dobTextString = dobText.getText().toString();
+                String mailString = mail.getText().toString();
+                String phoneText = phone.getText().toString();
+                String info = titleString+"\n"+nameString+"\n"+lnameString+"\n"+dobTextString+"\n"+mailString+"\n"+phoneText;
+                try{
+                    outputStream = openFileOutput(fileName,MODE_PRIVATE);
+                    outputStream.write(info.getBytes());
+                    outputStream.close();
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,20 +119,26 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
                 }
             }
+
         });
+
     }
+
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener(){
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
             myCalendar.set(Calendar.YEAR,year);
             myCalendar.set(Calendar.MONTH,monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-            updateLabel();
+            Calendar today = Calendar.getInstance();
+            if(myCalendar.before(today)){
+                updateLabel();
+            }
         }
     };
     private void updateLabel(){
         TextView dob = (TextView)findViewById(R.id.dobText);
-        fmtDateAndTime = new SimpleDateFormat("yyyy/MM/dd");
+        fmtDateAndTime = new SimpleDateFormat("dd-MM-yyyy");
         dob.setText(fmtDateAndTime.format(myCalendar.getTime()));
         Log.d("",dob.getText().toString());
+        }
     }
-}
